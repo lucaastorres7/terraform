@@ -1,0 +1,1 @@
+Ao criar a zona de DNS precisamos mudar manualmente onde compramos o DNS os nameservers
