@@ -7,7 +7,7 @@ resource "aws_lb" "web-app-alb" {
   subnets = data.aws_subnets.default-subnets.ids
 
   security_groups = [aws_security_group.web-lb-sg.id]
-  
+
   tags = {
     project = "terraform"
   }

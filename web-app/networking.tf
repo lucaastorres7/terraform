@@ -34,7 +34,7 @@ resource "aws_vpc_security_group_ingress_rule" "web-app-allow" {
   from_port   = 8080
   to_port     = 8080
   ip_protocol = "tcp"
-  
+
   tags = {
     project = "terraform"
   }
@@ -81,8 +81,8 @@ resource "aws_vpc_security_group_ingress_rule" "lb-to-instance-allow" {
 
 resource "aws_vpc_security_group_egress_rule" "web-app-allow-all-out" {
   security_group_id = aws_security_group.web-app-sg.id
-  cidr_ipv4 = "0.0.0.0/0"
-  ip_protocol = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
 
   tags = {
     project = "terraform"
@@ -91,8 +91,8 @@ resource "aws_vpc_security_group_egress_rule" "web-app-allow-all-out" {
 
 resource "aws_vpc_security_group_egress_rule" "lb-allow-all-out" {
   security_group_id = aws_security_group.web-lb-sg.id
-  cidr_ipv4 = "0.0.0.0/0"
-  ip_protocol = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
 
   tags = {
     project = "terraform"
