@@ -7,6 +7,10 @@ resource "aws_lb" "web-app-alb" {
   subnets = data.aws_subnets.default-subnets.ids
 
   security_groups = [aws_security_group.web-lb-sg.id]
+  
+  tags = {
+    project = "terraform"
+  }
 }
 
 # -- Target Group --
@@ -27,6 +31,10 @@ resource "aws_lb_target_group" "web-app-tg" {
     unhealthy_threshold = 2
     interval            = 15
     timeout             = 10
+  }
+
+  tags = {
+    project = "terraform"
   }
 }
 
@@ -57,7 +65,12 @@ resource "aws_lb_listener" "web-app-listener" {
       status_code  = 404
     }
   }
+
+  tags = {
+    project = "terraform"
+  }
 }
+
 resource "aws_lb_listener_rule" "instances-forward" {
   listener_arn = aws_lb_listener.web-app-listener.arn
 
@@ -77,5 +90,9 @@ resource "aws_lb_listener_rule" "instances-forward" {
     path_pattern {
       values = ["*"]
     }
+  }
+
+  tags = {
+    project = "terraform"
   }
 }
