@@ -6,9 +6,9 @@ resource "aws_route53_zone" "primary" {
   }
 }
 
-resource "aws_route53_record" "root" {
+resource "aws_route53_record" "lb" {
   zone_id = aws_route53_zone.primary.zone_id
-  name    = "devopslt.cloud"
+  name    = "lb.devopslt.cloud"
   type    = "A"
 
   alias {
