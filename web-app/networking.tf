@@ -3,27 +3,21 @@ resource "aws_security_group" "web-app-sg" {
   name        = "web-app-sg"
   description = "Security Group for allowing internet traffic to web server"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_security_group" "web-lb-sg" {
   name        = "load-balancer-sg"
   description = "Security Group for allowing internet traffic to multiple web servers"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_security_group" "lb-to-instance-sg" {
   name        = "lb-to-instance-sg"
   description = "Security Group for allowing traffic between ALB and Instances"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 # SG Rules
@@ -35,9 +29,7 @@ resource "aws_vpc_security_group_ingress_rule" "web-app-allow" {
   to_port     = 8080
   ip_protocol = "tcp"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_vpc_security_group_ingress_rule" "web-lb-allow-http" {
@@ -48,9 +40,7 @@ resource "aws_vpc_security_group_ingress_rule" "web-lb-allow-http" {
   to_port     = 80
   ip_protocol = "tcp"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_vpc_security_group_ingress_rule" "web-lb-allow-https" {
@@ -61,9 +51,7 @@ resource "aws_vpc_security_group_ingress_rule" "web-lb-allow-https" {
   to_port     = 443
   ip_protocol = "tcp"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_vpc_security_group_ingress_rule" "lb-to-instance-allow" {
@@ -74,9 +62,7 @@ resource "aws_vpc_security_group_ingress_rule" "lb-to-instance-allow" {
   ip_protocol                  = "tcp"
   referenced_security_group_id = aws_security_group.web-lb-sg.id
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_vpc_security_group_egress_rule" "web-app-allow-all-out" {
@@ -84,9 +70,7 @@ resource "aws_vpc_security_group_egress_rule" "web-app-allow-all-out" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_vpc_security_group_egress_rule" "lb-allow-all-out" {
@@ -94,9 +78,7 @@ resource "aws_vpc_security_group_egress_rule" "lb-allow-all-out" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 # -- Data --

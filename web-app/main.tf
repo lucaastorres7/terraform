@@ -18,3 +18,11 @@ terraform {
 provider "aws" {
   region = "us-east-1"
 }
+
+locals {
+  tags = {
+    project    = "terraform"
+    managed_by = "terraform"
+    owner      = "devops"
+  }
+}

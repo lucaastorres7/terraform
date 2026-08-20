@@ -1,9 +1,7 @@
 resource "aws_route53_zone" "primary" {
   name = "devopslt.cloud"
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_route53_record" "lb" {

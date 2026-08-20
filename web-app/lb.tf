@@ -8,9 +8,7 @@ resource "aws_lb" "web-app-alb" {
 
   security_groups = [aws_security_group.web-lb-sg.id]
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 # -- Target Group --
@@ -33,9 +31,7 @@ resource "aws_lb_target_group" "web-app-tg" {
     timeout             = 10
   }
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_lb_target_group_attachment" "web-app-1" {
@@ -66,9 +62,7 @@ resource "aws_lb_listener" "web-app-listener" {
     }
   }
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
 
 resource "aws_lb_listener_rule" "instances-forward" {
@@ -92,7 +86,5 @@ resource "aws_lb_listener_rule" "instances-forward" {
     }
   }
 
-  tags = {
-    project = "terraform"
-  }
+  tags = local.tags
 }
