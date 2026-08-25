@@ -26,3 +26,20 @@ locals {
     owner      = "devops"
   }
 }
+
+# -- Modules --
+
+module "web-instances" {
+  source = "./modules/compute"
+
+  # -- Input Variables --
+  instance_count     = 2
+  base_instance_name = "web_app"
+  tags               = local.tags
+
+  ingress_rule = [
+    { ip_address = "0.0.0.0/0", port = 443, protocol = "tcp" },
+    { ip_address = "0.0.0.0/0", port = 80, protocol = "tcp" },
+    { ip_address = "0.0.0.0/0", port = 8080, protocol = "tcp" },
+  ]
+}
