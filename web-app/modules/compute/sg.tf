@@ -15,8 +15,8 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_out" {
 
 resource "aws_vpc_security_group_ingress_rule" "ingress_rule_sg" {
   for_each = {
-    for index, rule in var.ingress_rule:
-      index => rule # Not perfect since indexes fluctuate a lot (if order changes, resources will be changed)
+    for rule in var.ingress_rule:
+      "${rule.protocol}-${rule.port}" => rule # Not perfect since indexes fluctuate a lot (if order changes, resources will be changed)
   }
 
   security_group_id = aws_security_group.instance_sg.id
