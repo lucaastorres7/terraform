@@ -30,6 +30,10 @@ data "aws_subnets" "default_subnets" {
   }
 }
 
+output "subnets" {
+  value = data.aws_subnets.default_subnets.ids
+}
+
 locals {
   tags = {
     project    = "terraform"
@@ -53,4 +57,13 @@ module "web-instances" {
     { ip_address = "0.0.0.0/0", port = 80, protocol = "tcp" },
     { ip_address = "0.0.0.0/0", port = 8080, protocol = "tcp" },
   ]
+}
+
+module "lb" {
+  source = "./modules/load_balancing"
+
+  lb_name = "test-lb"
+  subnets_ids = data.aws_subnets.default_subnets.ids
+
+  tags = local.tags
 }
